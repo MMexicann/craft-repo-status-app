@@ -227,6 +227,7 @@ function cmpArrays(a: (number | string)[], b: (number | string)[]): number {
   return a.length - b.length;
 }
 
+/** Compare column values using the column's text, date, age, numeric or version order. */
 function cmpValues(kind: Kind, a: string | number, b: string | number): number {
   switch (kind) {
     case 'text': return String(a).localeCompare(String(b), undefined, { sensitivity: 'base', numeric: true });
