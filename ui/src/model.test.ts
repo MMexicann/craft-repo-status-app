@@ -51,6 +51,7 @@ test('build versions compare every prerelease identifier before their release', 
     'v1.0.0-alpha', 'v1.0.0-alpha.1', 'v1.0.0-alpha.beta',
     'v1.0.0-beta', 'v1.0.0-beta.2', 'v1.0.0-beta.11', 'v1.0.0-rc.1', 'v1.0.0'];
   const builds = tags.map((latest_build, i) => entry(String(tags.length - i), { latest_build }));
+  /** Read build tags back in the requested table order. */
   const sortedTags = (dir: 'asc' | 'desc') => sortEntries(builds, 'latest_build', dir).map((r) => r.stats!.latest_build);
   assert.deepEqual(sortedTags('asc'), tags);
   assert.deepEqual(sortedTags('desc'), [...tags].reverse());
