@@ -213,16 +213,15 @@ export function versionKey(tag: string): (number | string)[] {
 function cmpArrays(a: (number | string)[], b: (number | string)[]): number {
   for (let i = 0; i < Math.min(a.length, b.length); i++) {
     const av = a[i], bv = b[i];
-    if (typeof av === 'number' && typeof bv === 'number') {
-      if (av !== bv) return av - bv;
-      continue;
-    }
+    if (av === bv) continue;
+    if (typeof av === 'number' && typeof bv === 'number') return av - bv;
     const as = String(av), bs = String(bv);
     const an = /^\d+$/.test(as), bn = /^\d+$/.test(bs);
     if (an !== bn) return Number(bn) - Number(an);
     // Compare numeric identifiers without losing precision to Number.
     if (an && as.length !== bs.length) return as.length - bs.length;
-    if (as !== bs) return as < bs ? -1 : 1;
+    if (as < bs) return -1;
+    if (as > bs) return 1;
   }
   return a.length - b.length;
 }
