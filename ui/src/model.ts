@@ -210,6 +210,7 @@ export function versionKey(tag: string): (number | string)[] {
   return [+m[1]!, +(m[2] ?? 0), +(m[3] ?? 0), m[4] !== undefined ? -1 : 0, ...(m[4]?.split('.') ?? [])];
 }
 
+/** Compare version keys by core numbers, release flag, then SemVer prerelease identifiers. */
 function cmpArrays(a: (number | string)[], b: (number | string)[]): number {
   for (let i = 0; i < Math.min(a.length, b.length); i++) {
     const av = a[i], bv = b[i];
